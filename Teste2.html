@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Aprendendo While</title>
+	<style type="text/css">
+		table, tr, td{
+			border-style: groove;
+		}
+		table{
+			padding: 2px;
+    		margin: 5px 10px;
+		}
+		td{
+			padding: 15px;
+		}
+		.negrito {
+			font-size: x-large; 
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+<h3>Aprendendo While</h3>
+<select id="operacao">
+	<option value="">escolha a operação</option>
+	<option value="+">+</option>
+	<option value="-">-</option>
+	<option value="*">*</option>
+	<option value="/">/</option>
+</select>
+<select disabled="" id="select">
+	<option value="">escolha um numero</option>
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+</select>
+<table id="tabela">
+</table>
+</body>
+</html>
+<script type="text/javascript">
+
+	var op = "";
+
+	var operacao = document.getElementById('operacao');
+	operacao.onchange = function() {
+		var select = document.getElementById('select');
+		if(operacao.value == ""){			
+			select.disabled = true;
+		}else{
+			select.disabled = false;
+			op = operacao.value;
+		}
+	}
+
+	var select = document.getElementById('select');
+	select.onchange = function() {
+		//Codigo para zerar a tabela
+		document.getElementById('tabela').innerHTML = "";
+		console.log(select.value, op);
+			if (select.value != "") {
+				criar_tabela(select.value, op);
+			}
+			else{
+				alert('Escolhe a tabela Uau');
+			}
+	
+
+	}
+		
+
+	function criar_tabela(numero, operacao){
+		var tabela = document.getElementById('tabela');
+		var cont = 1;
+		var primeiro_numero = numero;
+		while(cont <= 10){
+
+			switch (operacao) {
+			  case '+':
+			    resultado = parseInt(numero) + parseInt(cont);
+			    break;
+			  case '-':
+			  	resultado = parseInt(numero) - parseInt(cont);
+			    break;
+			  case '*':
+			    resultado = parseInt(numero) * parseInt(cont);
+			    break;
+		      case '/':
+		    	resultado = parseInt(numero) / parseInt(cont);
+		    	break;
+			  default:
+			    resultado = "desculpe mas você não escolheu uma expressão";			
+			}
+
+			tabela.innerHTML += '<tr><td>'+primeiro_numero+'<td class="negrito"> '+operacao+' </td></td> <td>'+cont+'<td class="negrito"> = </td></td> <td>'+resultado+'</td></tr>';
+			cont++;
+		}
+	}
+	
+</script>
